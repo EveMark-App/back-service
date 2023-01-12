@@ -7,11 +7,14 @@ const Event = new mongoose.Schema({
   creator: {type:mongoose.Schema.Types.ObjectId, required:true},
   bannerURL:String,
   location: String,
-  date: Date,
+  start_date: Date,
+  end_date:Date,
   category: String,
   price: mongoose.Schema.Types.Decimal128,
   program: mongoose.Schema.Types.Mixed,
   attendees:[{type:mongoose.Schema.Types.ObjectId, ref:"User"}],
+  checked_in_attendees:[{type:mongoose.Schema.Types.ObjectId, ref:"User"}],
+
   created_at: { type: Date, default: Date.now },
 });
 

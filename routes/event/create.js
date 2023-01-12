@@ -13,11 +13,13 @@ module.exports = async function (req, res) {
       creator:req.user._id,
       bannerURL:"String",
       location: body.event_location,
-      date: body.event_date,
+      start_date: body.event_start_date,
+      end_date:body.event_end_date,
       category: body.event_category,
       program:body.program,
       price: body.event_price,
       attendees:[],
+      checked_in_attendees:[],
     });
     console.log("Event created  ", newEvent);
 

@@ -12,7 +12,7 @@ router.post('/create', create);
 router.post('/login', login);
 router.post("/logout",isAuthenticated,logout)
 router.post('/check-token', isAuthenticated,checkToken );
-router.get('/get-my-events', isAuthenticated,getMyEvents);
-router.get("/get-created-events",isAuthenticated,getCreatedEvents)
+router.get('/get-my-events',getMyEvents);
+router.get("/get-created-events",getCreatedEvents)
 
 module.exports = router;
