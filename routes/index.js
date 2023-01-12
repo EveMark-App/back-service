@@ -7,7 +7,7 @@ const isAuthenticated = require("../middleware/isAuthenticated");
 const fs = require("fs");
 
 /* GET home page. */
-router.get("/", async function (req, res, next) {
+router.get("/",isAuthenticated,  function (req, res, next) {
   res.status(200).json({ msg: "good" });
   //   try {
   //    // const fileStr = fs.readFileSync(__dirname+'/a.png', {encoding: 'base64'});

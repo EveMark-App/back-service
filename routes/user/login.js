@@ -30,7 +30,7 @@ module.exports = function (req, res) {
           const token = jwt.sign(payload, process.env.AUTH_SECRET, {
             expiresIn: "48h",
           });
-          res.cookie("access-token", token, { httpOnly: true }).status(200).json(payload);
+          res.cookie("access-token", token).status(200).json(payload);
         }
       });
     }
