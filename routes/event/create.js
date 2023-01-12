@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
       name: body.name,
       description: body.description,
       short_description: body.short_description,
-      creator: body.creator,
+      creator: req.user._id,
       bannerURL: body.bannerURL,
       location: body.ocation,
       start_date: body.start_date,
@@ -31,6 +31,6 @@ module.exports = async function (req, res) {
     res.status(200).json(newEvent);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Error creating new event please try again." + err);
+    res.status(500).json(err);
   }
 };
