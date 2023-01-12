@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 function isAuthenticated (req, res, next) {
   const token = req.cookies["access-token"];
-  console.log(req.cookies)
+  
   if (!token) {
     res.status(401).send('Unauthorized: No token provided');
   } else {
@@ -12,6 +12,7 @@ function isAuthenticated (req, res, next) {
         res.status(401).send('Unauthorized: Invalid token');
       } else {
         req.user = decoded;
+        console.log(req.user)
         next();
       }
     });

@@ -4,7 +4,7 @@ const User = require("../../models/User");
 module.exports = async function (req, res) {
  // console.log("Creating an event with body ", req.body);
   const body = req.body;
-
+  console.log(req.user)
   try {
     const newEvent = await Event.create({
       name: body.name,
@@ -22,7 +22,7 @@ module.exports = async function (req, res) {
       checked_in_attendees: [],
     });
 
-    await User.findByIdAndUpdate(body.creator, {
+    await User.findByIdAndUpdate(req.user._id, {
       $push: { created_events: newEvent._id },
     });
 
