@@ -7,13 +7,17 @@ module.exports =  async  function(req, res) {
     if(userExists)
       return res.status(500).json({msg:"user already exists"})
       
-    const user = new User({ email, password, first_name, last_name });
-    user.save(function(err) {
-      if (err) {
-        res.status(500)
-          .json({err:"Error registering new user please try again." + err});
-      } else {
-        res.status(200).json({msg:"Welcome to the club!"});
+      try{
+        const user = new User.create({ email, password, first_name, last_name, created_events:[], my_events:[],test:"teeest" });
+        res.status(200).json(user);
       }
-    });
+      catch(e)
+      {
+        console.log("error while creating a user" + e)
+        res.status(500).json({error:"error while creating a user" + e})
+      }
+  
+
+
+
   };

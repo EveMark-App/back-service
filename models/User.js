@@ -6,9 +6,11 @@ const User = new mongoose.Schema({
   first_name:{type:String,required:true},
   last_name:{type:String,required:true},
   email: { type: String, required: true, unique: true },
+  my_events:[{type:mongoose.Schema.Types.ObjectId, ref:"Event"}],
+  created_events:[{type:mongoose.Schema.Types.ObjectId, ref:"Event"}],
   password: { type: String, required: true },
-  created_at:{ type: Date, default: Date.now },
-  events:[{type:mongoose.Schema.Types.ObjectId, ref:"Event"}]
+  created_at:{ type: Date, default: Date.now }
+
 });
 
 User.pre("save", function (next) {
