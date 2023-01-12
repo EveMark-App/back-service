@@ -51,7 +51,6 @@ mongoose.connect(mongo_uri, function (err) {
     console.log(`Successfully connected to ${mongo_uri}`);
   }
 });
-console.log(cloudinary.config());
 app.use("/", indexRouter);
 app.use("/upload", uploadRouter);
 

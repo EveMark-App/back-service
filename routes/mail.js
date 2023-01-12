@@ -1,4 +1,3 @@
-const cloudinary = require('cloudinary').v2;
 const isAuthenticated = require('../middleware/isAuthenticated');
 var express = require('express');
 var router = express.Router();
@@ -6,9 +5,7 @@ var router = express.Router();
 
 router.post('/', async (req, res) => {
     try {
-        const fileStr = req.body.data;
-        const uploadResponse = await cloudinary.uploader.upload(fileStr);
-        console.log(uploadResponse);
+        req.body
         res.status(200).json(uploadResponse);
     } catch (err) {
         console.error(err);
