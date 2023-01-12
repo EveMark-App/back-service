@@ -6,7 +6,7 @@ const getOne = require("./get-one")
 const isAuthenticated = require('../../middleware/isAuthenticated');
 
 router.post('/create',isAuthenticated, create);
-router.get("/get-all",isAuthenticated,getAll)
+router.get("/get-all",getAll)
 router.put("/update/:eventId",update)
 router.get("/get-one/:eventId",getOne)
 

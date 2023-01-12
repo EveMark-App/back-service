@@ -23,14 +23,16 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-app.use(
-    cors({
-      "origin": "http://localhost:3001",
-      "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-      "preflightContinue": false,
-      "optionsSuccessStatus": 204
-    })
+app.use(cors());
+app.all(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
   );
+  next();
+});
 
 app.use(logger("dev"));
 app.use(bodyParser.json({ limit: "50mb" }));
@@ -39,7 +41,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-const mongo_uri = "mongodb+srv://evemark:evemark1234@cluster0.g3yelbg.mongodb.net/?retryWrites=true&w=majority";
+const mongo_uri =
+  "mongodb+srv://evemark:evemark1234@cluster0.g3yelbg.mongodb.net/?retryWrites=true&w=majority";
 mongoose.set("strictQuery", false);
 mongoose.connect(mongo_uri, function (err) {
   if (err) {
