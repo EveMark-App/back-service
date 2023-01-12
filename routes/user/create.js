@@ -8,7 +8,7 @@ module.exports =  async  function(req, res) {
       return res.status(500).json({msg:"user already exists"})
       
       try{
-        const user = new User.create({ email, password, first_name, last_name, created_events:[], my_events:[],test:"teeest" });
+        const user = new User.create({ email, password, first_name, last_name, created_events:[], my_events:[]});
         res.status(200).json(user);
       }
       catch(e)
