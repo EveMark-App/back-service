@@ -8,8 +8,16 @@ module.exports =  async  function(req, res) {
       return res.status(500).json({msg:"user already exists"})
       
       try{
-        const user = new User.create({ email, password, first_name, last_name, created_events:[], my_events:[]});
-        res.status(200).json(user);
+        const user = new User({ email, password, first_name, last_name, created_events:[], my_events:[]});
+        user.save(function(err) {
+          if (err) {
+            res.status(500)
+              .json({err:"Error registering new user please try again." + err});
+          } else {
+            res.status(200).json({msg:"Welcome to the club!"});
+          }
+        });
+        
       }
       catch(e)
       {
