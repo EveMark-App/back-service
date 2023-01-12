@@ -10,7 +10,7 @@ module.exports = async function (req, res) {
       name: body.name,
       description: body.description,
       short_description: body.short_description,
-      creator: req.user._id,
+      creator: req.user.id,
       bannerURL: body.bannerURL,
       location: body.ocation,
       start_date: body.start_date,
@@ -22,7 +22,7 @@ module.exports = async function (req, res) {
       checked_in_attendees: [],
     });
 
-    await User.findByIdAndUpdate(req.user._id, {
+    await User.findByIdAndUpdate(req.user.id, {
       $push: { created_events: newEvent._id },
     });
 
