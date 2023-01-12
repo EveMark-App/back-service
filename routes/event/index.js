@@ -7,7 +7,7 @@ const buy = require("./buy")
 
 const isAuthenticated = require('../../middleware/isAuthenticated');
 
-router.post('/create', create);
+router.post('/create', isAuthenticated,create);
 router.get("/get-all",getAll)
 router.put("/update/:eventId",update)
 router.get("/get-one/:eventId",getOne)
