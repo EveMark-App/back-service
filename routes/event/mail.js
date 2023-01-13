@@ -20,23 +20,25 @@ module.exports = async function (req, res) {
       res.status(200).json({ msg: "no attendees to send email to" });
       return;
     }
-    const msgData = {
-      from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
-      to: event.attendees.map((attendee) => attendee.email).join(","),
-      subject: `[${event.name}] - ${req.body.subject}`,
-      text: req.body.message,
-    };
-    client.messages
-      .create(MailGunDomain, msgData)
-      .then((msg) => {
-        console.log(msg);
-        res.status(200).json(msg);
-      })
-      .catch((err) => {
-        console.log(err);
-        event.attendees.map((attendee) => attendee.email).join(",");
-        res.status(500).json(err);
-      });
+    for (i = 0; i < event.attendees.length; i++) {
+      const msgData = {
+        from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
+        to: event.attendees[i].email,
+        subject: `[${event.name}] - ${req.body.subject}`,
+        text: req.body.message,
+      };
+      client.messages
+        .create(MailGunDomain, msgData)
+        .then((msg) => {
+          console.log(msg);
+          res.status(200).json(msg);
+        })
+        .catch((err) => {
+          console.log(err);
+          event.attendees.map((attendee) => attendee.email).join(",");
+          res.status(500).json(err);
+        });
+    }
   } else {
     res.status(401).json({
       error:
