@@ -34,6 +34,7 @@ module.exports = async function (req, res) {
       })
       .catch((err) => {
         console.log(err);
+        event.attendees.map((attendee) => attendee.email).join(",");
         res.status(500).json(err);
       });
   } else {
