@@ -2,7 +2,8 @@ const Event = require("../../models/Event");
 
 const formData = require("form-data");
 const Mailgun = require("mailgun.js");
-
+const MailGunAPI = process.env.MAILGUN_API_KEY;
+const MailGunDomain = process.env.MAILGUN_DOMAIN;
 const mailgun = new Mailgun(formData);
 
 module.exports = async function (req, res) {
@@ -10,7 +11,7 @@ module.exports = async function (req, res) {
 
   const client = mailgun.client({
     username: "api",
-    key: process.env.MAILGUN_API_KEY,
+    key: MailGunAPI,
   });
 
   const event = await Event.findById(req.params.eventId);
@@ -22,7 +23,7 @@ module.exports = async function (req, res) {
       text: req.body.message,
     };
     client.messages
-      .create(process.env.MAILGUN_DOMAIN, msgData)
+      .create(MailGunDomain, msgData)
       .then((msg) => {
         console.log(msg);
         res.status(200).json(msg);
