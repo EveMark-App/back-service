@@ -14,7 +14,8 @@ module.exports = async function (req, res) {
     key: MailGunAPI,
   });
 
-  const event = await Event.findById(req.params.eventId).populate("attendees").populate("creator");
+  const event = await Event.findById(req.params.eventId).populate("attendees");
+  const creator = await User.findById(event.creator);
   if (event.creator == req.user.id) {
     if (event.attendees.length == 0) {
       res.status(501).json({ msg: "no attendees to send email to" });
@@ -22,7 +23,7 @@ module.exports = async function (req, res) {
     }
     for (i = 0; i < event.attendees.length; i++) {
       const msgData = {
-        from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
+        from: `${creator.first_name} ${creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
         to: `${event.attendees[i].first_name} ${event.attendees[i].last_name} <${event.attendees[i].email}>`,
         subject: `[${event.name}] - ${req.body.subject}`,
         text: req.body.message,
