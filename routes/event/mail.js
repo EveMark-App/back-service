@@ -20,7 +20,7 @@ module.exports = async function (req, res) {
       res.status(501).json({ msg: "no attendees to send email to" });
       return;
     }
-    for (i = 0; i < event.attendees.length(); i++) {
+    for (i = 0; i < event.attendees.length; i++) {
       const msgData = {
         from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
         to: `${event.attendees[i].first_name} ${event.attendees[i].last_name} <${event.attendees[i].email}>`,
