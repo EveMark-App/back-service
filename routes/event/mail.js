@@ -1,20 +1,17 @@
-const isAuthenticated = require("../../middleware/isAuthenticated");
-var express = require("express");
-var router = express.Router();
-const isAuthenticated = require("../../middleware/isAuthenticated");
 
-require("dotenv").config();
-const API_KEY = process.env.MAILGUN_API_KEY;
-const DOMAIN = process.env.MAILGUN_DOMAIN;
+
+const Event = require("../../models/Event");
 
 const formData = require("form-data");
 const Mailgun = require("mailgun.js");
 
 const mailgun = new Mailgun(formData);
-const client = mailgun.client({ username: "api", key: API_KEY });
 
 module.exports = async function (req, res) {
   console.log("Sending an email to all event's participants :", req.params.eventId);
+
+  const client = mailgun.client({ username: "api", key: process.env.MAILGUN_API_KEY });
+
   const event = await Event.findById(req.params.eventId);
   if (event.creator == req.user.id) {
     const msgData = {
@@ -24,7 +21,7 @@ module.exports = async function (req, res) {
       text: req.body.text,
     };
     client.messages
-      .create(DOMAIN, msgData)
+      .create(process.env.MAILGUN_DOMAIN, msgData)
       .then((msg) => {
         console.log(msg);
         res.status(200).json(msg);
