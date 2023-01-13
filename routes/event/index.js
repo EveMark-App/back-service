@@ -17,5 +17,5 @@ router.get("/get-one/:eventId", isAuthenticated, getOne);
 router.post("/buy", isAuthenticated, buy);
 router.post("/checkin", isAuthenticated, checkin);
 router.delete("/delete/:eventId", isAuthenticated, deleteRoute);
-router.post("/mail/:eventId", mail);
+router.post("/mail/:eventId", isAuthenticated, mail);
 module.exports = router;
