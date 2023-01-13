@@ -6,7 +6,10 @@ const Mailgun = require("mailgun.js");
 const mailgun = new Mailgun(formData);
 
 module.exports = async function (req, res) {
-  console.log("Sending an email to all event's participants :", req.params.eventId);
+  console.log(
+    "Sending an email to all event's participants :",
+    req.params.eventId
+  );
 
   const client = mailgun.client({
     username: "api",
@@ -14,7 +17,7 @@ module.exports = async function (req, res) {
   });
 
   const event = await Event.findById(req.params.eventId);
-  if (event.creator == req.user._id) {
+  if (event.creator == req.user.id) {
     const msgData = {
       from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
       to: event.attendees.map((attendee) => attendee.email),
