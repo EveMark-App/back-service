@@ -11,9 +11,13 @@ module.exports = async function (req, res) {
   try {
     const creator = await User.findById(req.user.id);
     const event = await Event.findById(req.body.eventId);
+
+    console.log(creator)
+    console.log(event)
+
     const participantId = req.body.participantId;
     if (creator._id != event.creator)
-      res.status(400).json({ error: "You are not the creator of the event" });
+      res.status(400).json(creator);
     if (!event.attendees.includes(participantId))
       res
         .status(400)
