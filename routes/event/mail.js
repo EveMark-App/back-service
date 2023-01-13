@@ -16,6 +16,10 @@ module.exports = async function (req, res) {
 
   const event = await Event.findById(req.params.eventId);
   if (event.creator == req.user.id) {
+    if (event.attendees.length == 0) {
+      res.status(200).json({ msg: "no attendees to send email to" });
+      return;
+    }
     const msgData = {
       from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
       to: event.attendees.map((attendee) => attendee.email).join(","),
