@@ -7,6 +7,7 @@ const buy = require("./buy");
 const checkin = require("./checkin");
 const deleteRoute = require("./delete");
 const isAuthenticated = require("../../middleware/isAuthenticated");
+const mail = require("./mail");
 
 router.post("/create", isAuthenticated, create);
 router.get("/get-all", isAuthenticated, getAll);
@@ -15,5 +16,5 @@ router.get("/get-one/:eventId", isAuthenticated, getOne);
 router.post("/buy", isAuthenticated, buy);
 router.post("/checkin", isAuthenticated, checkin);
 router.delete("/delete/:eventId", isAuthenticated, deleteRoute);
-router.post("/mail/:eventId", isAuthenticated, mail);
+router.post("/mail/:eventId", mail);
 module.exports = router;
