@@ -17,9 +17,10 @@ module.exports = async function (req, res) {
   const event = await Event.findById(req.params.eventId);
   if (event.creator == req.user.id) {
     if (event.attendees.length == 0) {
-      res.status(200).json({ msg: "no attendees to send email to" });
+      res.status(501).json({ msg: "no attendees to send email to" });
       return;
     }
+    console.log(event.attendees);
     for (i = 0; i < event.attendees.length; i++) {
       const msgData = {
         from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
@@ -35,7 +36,6 @@ module.exports = async function (req, res) {
         })
         .catch((err) => {
           console.log(err);
-          event.attendees.map((attendee) => attendee.email).join(",");
           res.status(500).json(err);
         });
     }
