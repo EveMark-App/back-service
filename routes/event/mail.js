@@ -6,10 +6,7 @@ const Mailgun = require("mailgun.js");
 const mailgun = new Mailgun(formData);
 
 module.exports = async function (req, res) {
-  console.log(
-    "Sending an email to all event's participants :",
-    req.params.eventId
-  );
+  console.log("Sending an email to all event's participants :", req.params.eventId);
 
   const client = mailgun.client({
     username: "api",
@@ -22,7 +19,7 @@ module.exports = async function (req, res) {
       from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
       to: event.attendees.map((attendee) => attendee.email),
       subject: `[${event.name}] - ${req.body.subject}`,
-      text: req.body.text,
+      text: req.body.message,
     };
     client.messages
       .create(process.env.MAILGUN_DOMAIN, msgData)
