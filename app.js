@@ -14,7 +14,7 @@ var uploadRouter = require("./routes/upload");
 
 var usersRouter = require("./routes/user");
 const eventsRouter = require("./routes/event");
-const mailRouter = require("./routes/mail")
+
 var app = express();
 
 cloudinary.config({
@@ -56,6 +56,5 @@ app.use("/upload", uploadRouter);
 
 app.use("/user", usersRouter);
 app.use("/event", eventsRouter);
-app.use("/mail", mailRouter);
 
 module.exports = app;
