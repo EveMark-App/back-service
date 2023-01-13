@@ -1,5 +1,3 @@
-
-
 const Event = require("../../models/Event");
 
 const formData = require("form-data");
@@ -8,9 +6,15 @@ const Mailgun = require("mailgun.js");
 const mailgun = new Mailgun(formData);
 
 module.exports = async function (req, res) {
-  console.log("Sending an email to all event's participants :", req.params.eventId);
+  console.log(
+    "Sending an email to all event's participants :",
+    req.params.eventId
+  );
 
-  const client = mailgun.client({ username: "api", key: process.env.MAILGUN_API_KEY });
+  const client = mailgun.client({
+    username: "api",
+    key: process.env.MAILGUN_API_KEY,
+  });
 
   const event = await Event.findById(req.params.eventId);
   if (event.creator == req.user.id) {
