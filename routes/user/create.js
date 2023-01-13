@@ -5,7 +5,7 @@ module.exports =  async  function(req, res) {
     const userExists =  await User.findOne({email:email})
     
     if(userExists)
-      return res.status(500).json({msg:"user already exists"})
+      return res.status(500).json({error:"user already exists"})
       
       try{
         const user = new User({ email, password, first_name, last_name, created_events:[], my_events:[]});
