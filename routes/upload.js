@@ -4,7 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 
-router.post('/', async (req, res) => {
+router.post('/',isAuthenticated, async (req, res) => {
     try {
         const fileStr = req.body.data;
         const uploadResponse = await cloudinary.uploader.upload(fileStr);

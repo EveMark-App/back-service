@@ -8,11 +8,11 @@ const buy = require("./buy")
 const isAuthenticated = require('../../middleware/isAuthenticated');
 
 router.post('/create', isAuthenticated,create);
-router.get("/get-all",getAll)
-router.put("/update/:eventId",update)
-router.get("/get-one/:eventId",getOne)
-router.post("/buy/:eventId",buy)
-router.post("/checkin/:eventId",buy)
+router.get("/get-all",isAuthenticated,getAll)
+router.put("/update/:eventId",isAuthenticated,update)
+router.get("/get-one/:eventId",isAuthenticated,getOne)
+router.post("/buy/:eventId",isAuthenticated,buy)
+router.post("/checkin/:eventId",isAuthenticated,buy)
 
 router.delete("/delete/:eventId")
 module.exports = router;
