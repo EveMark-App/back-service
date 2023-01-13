@@ -1,5 +1,5 @@
 const Event = require("../../models/Event");
-
+const User = require("../../models/User");
 const formData = require("form-data");
 const Mailgun = require("mailgun.js");
 const MailGunAPI = process.env.MAILGUN_API_KEY;
@@ -20,12 +20,12 @@ module.exports = async function (req, res) {
       res.status(501).json({ msg: "no attendees to send email to" });
       return;
     }
-    console.log(event.attendees[0].json());
-    console.log(event.attendees[0].email);
-    for (i = 0; i < event.attendees.length; i++) {
+
+    const attendees = await User.find({ _id: { $in: event.attendees } });
+    for (i = 0; i < attendees; i++) {
       const msgData = {
         from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
-        to: event.attendees[i].email,
+        to: `${attendees[i].first_name} ${attendees[i].last_name} <${attendees[i].email}>`,
         subject: `[${event.name}] - ${req.body.subject}`,
         text: req.body.message,
       };
