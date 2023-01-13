@@ -9,7 +9,6 @@ const mail = require("./mail");
 
 const deleteRoute = require("./delete");
 const isAuthenticated = require("../../middleware/isAuthenticated");
-const mail = require("./mail");
 
 router.post("/create", isAuthenticated, create);
 router.get("/get-all", isAuthenticated, getAll);
