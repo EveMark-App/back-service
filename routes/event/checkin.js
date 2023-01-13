@@ -12,26 +12,26 @@ module.exports = async function (req, res) {
     const creator = await User.findById(req.user.id);
     const event = await Event.findById(req.body.eventId);
 
-    console.log(creator)
-    console.log(event)
-    console.log(creator._id)
-    console.log(event.creator)
+
     const participantId = req.body.participantId;
     if (creator._id.toString() != event.creator.toString())
       return res.status(400).json("You are not the creator of the event");
     if (!event.attendees.includes(participantId))
       return res
         .status(400)
-        .json({ error: "the participant is not in the attendees list" });
+        .json({ error: "The participant is not in the attendees list" });
     if (event.checked_in_attendees.includes(participantId))
       return res
         .status(400)
-        .json({ error: "the participant is already checked in" });
+        .json({ error: "The participant is already checked in" });
 
-    await Event.updateOne({_id:event._id}, {
-      $push: { checked_in_attendees: participantId },
-    });
-    
+    await Event.updateOne(
+      { _id: event._id },
+      {
+        $push: { checked_in_attendees: participantId },
+      }
+    );
+
     const user = await User.findOne({ _id: participantId });
     return res.status(200).json(user);
   } catch (e) {
