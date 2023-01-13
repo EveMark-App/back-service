@@ -18,7 +18,7 @@ module.exports = async function (req, res) {
   const event = await Event.findById(req.params.eventId);
   if (event.creator == req.user.id) {
     const msgData = {
-      from: `${event.creator.first_name} ${event.creator.last_name} <${eventId}@no-reply.evemark.fun>`,
+      from: `${event.creator.first_name} ${event.creator.last_name} <${req.params.eventId}@no-reply.evemark.fun>`,
       to: event.attendees.map((attendee) => attendee.email),
       subject: `[${event.name}] - ${req.body.subject}`,
       text: req.body.text,
