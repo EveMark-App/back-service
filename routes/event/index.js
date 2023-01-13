@@ -12,8 +12,8 @@ router.post('/create', isAuthenticated,create);
 router.get("/get-all",isAuthenticated,getAll)
 router.put("/update/:eventId",isAuthenticated,update)
 router.get("/get-one/:eventId",isAuthenticated,getOne)
-router.post("/buy/:eventId",isAuthenticated,buy)
-router.post("/checkin/:eventId",isAuthenticated,checkin)
+router.post("/buy",isAuthenticated,buy)
+router.post("/checkin",isAuthenticated,checkin)
 
 router.delete("/delete/:eventId",isAuthenticated,deleteRoute)
 module.exports = router;

@@ -12,7 +12,7 @@ module.exports = async function (req, res) {
       short_description: body.short_description,
       creator: req.user.id,
       bannerURL: body.bannerURL,
-      location: body.ocation,
+      location: body.location,
       start_date: body.start_date,
       end_date: body.end_date,
       category: body.category,

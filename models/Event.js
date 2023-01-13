@@ -6,7 +6,7 @@ const Event = new mongoose.Schema({
   description: String,
   creator: {type:mongoose.Schema.Types.ObjectId, required:true},
   bannerURL:String,
-  location: String,
+  location: {type:mongoose.Schema.Types.String},
   start_date: Date,
   end_date:Date,
   category: String,
