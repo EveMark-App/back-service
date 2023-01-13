@@ -5,6 +5,8 @@ const update = require("./update");
 const getOne = require("./get-one");
 const buy = require("./buy");
 const checkin = require("./checkin");
+const mail = require("./mail");
+
 const deleteRoute = require("./delete");
 const isAuthenticated = require("../../middleware/isAuthenticated");
 const mail = require("./mail");
