@@ -11,7 +11,7 @@ const deleteRoute = require("./delete");
 const isAuthenticated = require("../../middleware/isAuthenticated");
 
 router.post("/create", isAuthenticated, create);
-router.get("/get-all", isAuthenticated, getAll);
+router.get("/get-all", getAll);
 router.put("/update/:eventId", isAuthenticated, update);
 router.get("/get-one/:eventId", isAuthenticated, getOne);
 router.post("/buy", isAuthenticated, buy);
