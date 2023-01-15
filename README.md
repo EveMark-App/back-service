@@ -4,11 +4,14 @@ A brief description of the project and its purpose.
 
 ## Getting Started Backend
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+EveMark Backend makes use of the expressjs framework, which is a Node.js-based back end web application framework for building RESTful APIs. 
+
+Backend features include creating/reading/updating/deleting/authenticating the user with JWT tokens. We also used authorizations to improve server security. It also allows users to create/read/update/delete events stored on our MongoDB database at last mongodb. 
+the app features uploading images and hosting them on cloudinary, as well as sending emails to participants via our dashboard using mailgun.
 
 ### Installing
 
-After cloning the project, you need to install all the dependencies with you favorate package manager:
+After cloning the project, you need to install all the dependencies with you favourite package manager:
 ```sh
 yarn 
 //or
