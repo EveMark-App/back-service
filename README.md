@@ -14,7 +14,7 @@ the app features uploading images and hosting them on cloudinary, as well as se
 ### Events APIs
 | API Endpoint            | Type   | Description                                                              |
 |-------------------------|--------|--------------------------------------------------------------------------|
-| "/event/create”         | POST   | Create an event                                                          |
+| /event/create           | POST   | Create an event                                                          |
 | /event/get-all          | GET    | Retrieve all events                                                      |
 | /event/update/:eventId  | PUT    | Update an event with eventId                                             |
 | /event/get-one/:eventId | GET    | Retrieve a specific event with eventId                                   |
