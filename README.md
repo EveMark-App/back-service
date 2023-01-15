@@ -9,7 +9,33 @@ EveMark Backend makes use of the expressjs framework, which is a Node.js-based b
 Backend features include creating/reading/updating/deleting/authenticating the user with JWT tokens. We also used authorizations to improve server security. It also allows users to create/read/update/delete events stored on our MongoDB database at last mongodb. 
 the app features uploading images and hosting them on cloudinary, as well as sending emails to participants via our dashboard using mailgun.
 
-### Installing Dependencies
+## API Reference
+
+### Events APIs
+| API Endpoint            | Type   | Description                                                              |
+|-------------------------|--------|--------------------------------------------------------------------------|
+| "/event/create”         | POST   | Create an event                                                          |
+| /event/get-all          | GET    | Retrieve all events                                                      |
+| /event/update/:eventId  | PUT    | Update an event with eventId                                             |
+| /event/get-one/:eventId | GET    | Retrieve a specific event with eventId                                   |
+| /event/buy              | POST   | Buy ticket for a specific event passed in body                           |
+| /event/checkin          | POST   | Check in an attendee with userId in a specific event with eventId        |
+| /event/delete/:eventId  | DELETE | Delete a specific event with eventId                                     |
+| /event/mail/:eventId    | POST   | Send mail to participants with eventId and email content in request body |
+
+### Users APIs
+| API Endpoint             | Type   | Description                                                              |
+|--------------------------|--------|--------------------------------------------------------------------------|
+| /user/create             | POST   | Create a user                                                            |
+| /user/login              | POST   | Login a user                                                             |
+| /user/logout             | POST   | Logout a user                                                            |
+| /user/get-my-event       | GET    | Retrieve events that this user is participating in                       |
+| /user/get-created-events | GET    | Retrieve events created by this user                                     |
+| /event/checkin           | POST   | Check in an attendee with userId in a specific event with eventId        |
+| /event/delete/:eventId   | DELETE | Delete a specific event with eventId                                     |
+| /event/mail/:eventId     | POST   | Send mail to participants with eventId and email content in request body |
+
+## Installing Dependencies
 
 After cloning the project, you need to install all the dependencies with you favourite package manager (We recommend using yarn as npm is not working correctly)
 ```sh
@@ -37,7 +63,7 @@ MAILGUN_DOMAIN=
 
 
 
-## Running the project
+## Running The Project
 To run the project in the development environment, use the following command
 ```sh
 yarn dev
